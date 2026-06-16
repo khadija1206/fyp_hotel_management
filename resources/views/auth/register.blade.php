@@ -21,11 +21,21 @@
         />
 
         <x-form-field
+            label="Phone Number"
+            name="phone"
+            type="tel"
+            required
+            placeholder="+92-300-1234567"
+            hint="We'll use this for booking confirmations"
+        />
+
+        <x-form-field
             label="Password"
             name="password"
             type="password"
             required
             autocomplete="new-password"
+            hint="Min 8 characters"
         />
 
         <x-form-field

@@ -6,6 +6,11 @@ use App\Http\Controllers\Admin\RoomTypeController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Guest\BillController as GuestBillController;
+use App\Http\Controllers\Guest\BookingController as GuestBookingController;
+use App\Http\Controllers\Guest\ComplaintController as GuestComplaintController;
+use App\Http\Controllers\Guest\DashboardController as GuestDashboardController;
+use App\Http\Controllers\Guest\ProfileController as GuestProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Receptionist\BookingController;
 use App\Http\Controllers\Receptionist\CheckInController;
@@ -68,8 +73,22 @@ Route::middleware(['auth', 'verified', 'role:admin,receptionist'])->group(functi
     Route::post('walk-in', [WalkInController::class, 'store'])->name('walk-in.store');
 });
 
+Route::middleware(['auth', 'verified', 'role:guest'])->prefix('portal')->name('guest.')->group(function () {
+    Route::get('/', [GuestDashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('bookings', [GuestBookingController::class, 'index'])->name('bookings.index');
+    Route::get('bookings/{booking}', [GuestBookingController::class, 'show'])->name('bookings.show');
+
+    Route::get('bills', [GuestBillController::class, 'index'])->name('bills.index');
+    Route::get('bills/{booking}', [GuestBillController::class, 'show'])->name('bills.show');
+
+    Route::get('complaints', [GuestComplaintController::class, 'index'])->name('complaints.index');
+
+    Route::get('profile', [GuestProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('profile', [GuestProfileController::class, 'update'])->name('profile.update');
+});
+
 Route::middleware(['auth'])->group(function () {
-    Route::get('/my-portal', [DashboardController::class, 'index'])->name('guest.dashboard');
     Route::get('/_design-test', function () {
         return view('_design-test');
     });

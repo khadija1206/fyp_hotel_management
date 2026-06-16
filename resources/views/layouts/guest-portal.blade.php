@@ -24,7 +24,9 @@
                         <i class="bi bi-person-circle"></i> {{ Auth::user()->name }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="bi bi-person"></i> Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ route('guest.profile.edit') }}"><i class="bi bi-person"></i> My Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ route('guest.bookings.index') }}"><i class="bi bi-calendar-check"></i> My Bookings</a></li>
+                        <li><a class="dropdown-item" href="{{ route('guest.bills.index') }}"><i class="bi bi-receipt"></i> My Bills</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">

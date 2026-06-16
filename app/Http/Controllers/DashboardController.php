@@ -21,7 +21,7 @@ class DashboardController extends Controller
             return $this->receptionistDashboard();
         }
 
-        return view('dashboard.guest');
+        return redirect()->route('guest.dashboard');
     }
 
     private function adminDashboard()
