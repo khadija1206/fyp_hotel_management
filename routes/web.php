@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\ComplaintController as AdminComplaintController;
+use App\Http\Controllers\Admin\LayoutEditorController;
 use App\Http\Controllers\Admin\ReportsController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\RoomTypeController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FloorPlanController;
 use App\Http\Controllers\Guest\BillController as GuestBillController;
 use App\Http\Controllers\Guest\BookingController as GuestBookingController;
 use App\Http\Controllers\Guest\ComplaintController as GuestComplaintController;
@@ -55,9 +57,17 @@ Route::middleware(['auth', 'verified', 'role:admin'])
         Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
 
         Route::get('reports', [ReportsController::class, 'index'])->name('reports.index');
+
+        Route::get('layout-editor', [LayoutEditorController::class, 'index'])->name('layout-editor.index');
+        Route::post('layout-editor/save', [LayoutEditorController::class, 'savePositions'])->name('layout-editor.save');
     });
 
 Route::middleware(['auth', 'verified', 'role:admin,receptionist'])->group(function () {
+    Route::get('floor-plan', [FloorPlanController::class, 'index'])->name('floor-plan.index');
+    Route::get('floor-plan/floor/{floor}', [FloorPlanController::class, 'floor'])->name('floor-plan.floor');
+    Route::get('floor-plan/rooms/{room}/detail', [FloorPlanController::class, 'roomDetail'])->name('floor-plan.room-detail');
+    Route::get('floor-plan/poll/{floor}', [FloorPlanController::class, 'statusPoll'])->name('floor-plan.poll');
+
     Route::resource('guests', GuestController::class);
 
     Route::get('bookings/available-rooms', [BookingController::class, 'availableRooms'])->name('bookings.available-rooms');

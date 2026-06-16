@@ -65,14 +65,15 @@
             </x-card>
         </div>
         <div class="col-lg-6">
-            <x-card title="Coming Soon">
-                <ul style="line-height: 2; padding-left: var(--space-4);">
+            <x-card title="More Analytics">
+                <ul style="line-height: 2; padding-left: var(--space-4); margin-bottom: 0;">
                     <li>Booking volume trends</li>
                     <li>Average length of stay</li>
                     <li>Top guests by spend</li>
-                    <li>Complaint resolution metrics (after complaint module)</li>
+                    <li>Complaint resolution metrics</li>
                     <li>Occupancy heatmap</li>
                 </ul>
+                <p class="text-secondary-custom small mt-3 mb-0">Additional charts can be added in future versions.</p>
             </x-card>
         </div>
     </div>

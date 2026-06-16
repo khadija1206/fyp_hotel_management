@@ -70,7 +70,9 @@
             <x-card title="Quick Stats">
                 <x-info-row label="Active Staff">{{ $totalStaff }}</x-info-row>
                 <x-info-row label="Registered Guests">{{ $totalGuests }}</x-info-row>
-                <x-info-row label="Pending Bookings"><span class="text-secondary-custom">Coming soon</span></x-info-row>
+                <x-info-row label="Pending Bookings">
+                    <a href="{{ route('bookings.index') }}">{{ $pendingBookings }}</a>
+                </x-info-row>
                 <x-info-row label="Open Complaints">
                     @if($complaintStats['total_open'] > 0)
                         <span class="text-danger">{{ $complaintStats['total_open'] }}</span>

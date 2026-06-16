@@ -589,6 +589,38 @@ code, pre {
 .guest-topbar .btn-link:hover { color: var(--color-text-guest-topbar); }
 .guest-content { flex: 1; max-width: var(--guest-content-max-width); margin: 0 auto; padding: var(--space-8) var(--space-6); width: 100%; }
 
+.guest-portal-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.guest-portal-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.guest-portal-nav-link:hover {
+    background-color: var(--color-bg-subtle);
+    color: var(--color-text-primary);
+    text-decoration: none;
+}
+
+.guest-portal-nav-link.active {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
 .data-table-wrapper {
     background-color: var(--color-bg-card);
     border: 1px solid var(--color-border-light);

@@ -6,13 +6,61 @@
     </div>
 
     @if (Auth::user()->isAdmin())
-        <div class="app-sidebar-section">Main</div>
+        <div class="app-sidebar-section">Operations</div>
         <ul class="app-sidebar-nav">
             <li class="app-sidebar-nav-item">
                 <a href="{{ route('dashboard') }}" class="app-sidebar-nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
             </li>
+            <li class="app-sidebar-nav-item">
+                <a href="{{ route('floor-plan.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('floor-plan.*') ? 'active' : '' }}">
+                    <i class="bi bi-grid-3x3"></i> Floor Plan
+                </a>
+            </li>
+            <li class="app-sidebar-nav-item">
+                <a href="{{ route('bookings.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('bookings.*') ? 'active' : '' }}">
+                    <i class="bi bi-calendar-check"></i> Bookings
+                </a>
+            </li>
+            <li class="app-sidebar-nav-item">
+                <a href="{{ route('check-in.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('check-in.*') ? 'active' : '' }}">
+                    <i class="bi bi-box-arrow-in-right"></i> Check-Ins
+                </a>
+            </li>
+            <li class="app-sidebar-nav-item">
+                <a href="{{ route('check-out.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('check-out.*') ? 'active' : '' }}">
+                    <i class="bi bi-box-arrow-right"></i> Check-Outs
+                </a>
+            </li>
+            <li class="app-sidebar-nav-item">
+                <a href="{{ route('walk-in.create') }}" class="app-sidebar-nav-link {{ request()->routeIs('walk-in.*') ? 'active' : '' }}">
+                    <i class="bi bi-person-walking"></i> Walk-In
+                </a>
+            </li>
+        </ul>
+
+        <div class="app-sidebar-section">Records</div>
+        <ul class="app-sidebar-nav">
+            <li class="app-sidebar-nav-item">
+                <a href="{{ route('guests.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('guests.*') ? 'active' : '' }}">
+                    <i class="bi bi-people"></i> Guests
+                </a>
+            </li>
+            <li class="app-sidebar-nav-item">
+                <a href="{{ route('admin.complaints.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('admin.complaints.*') ? 'active' : '' }}">
+                    <i class="bi bi-chat-square-text"></i> Complaints
+                </a>
+            </li>
+            <li class="app-sidebar-nav-item">
+                <a href="{{ route('payments.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('payments.*') || request()->routeIs('refunds.*') ? 'active' : '' }}">
+                    <i class="bi bi-cash-coin"></i> Payments
+                </a>
+            </li>
+        </ul>
+
+        <div class="app-sidebar-section">Hotel Setup</div>
+        <ul class="app-sidebar-nav">
             <li class="app-sidebar-nav-item">
                 <a href="{{ route('admin.rooms.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('admin.rooms.*') ? 'active' : '' }}">
                     <i class="bi bi-door-closed"></i> Rooms
@@ -24,32 +72,17 @@
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
-                <a href="{{ route('bookings.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('bookings.*') ? 'active' : '' }}">
-                    <i class="bi bi-calendar-check"></i> Bookings
-                </a>
-            </li>
-            <li class="app-sidebar-nav-item">
-                <a href="{{ route('guests.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('guests.*') ? 'active' : '' }}">
-                    <i class="bi bi-people"></i> Guests
-                </a>
-            </li>
-            <li class="app-sidebar-nav-item">
-                <a href="{{ route('walk-in.create') }}" class="app-sidebar-nav-link {{ request()->routeIs('walk-in.*') ? 'active' : '' }}">
-                    <i class="bi bi-person-walking"></i> Walk-In
+                <a href="{{ route('admin.layout-editor.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('admin.layout-editor.*') ? 'active' : '' }}">
+                    <i class="bi bi-arrows-move"></i> Layout Editor
                 </a>
             </li>
         </ul>
 
-        <div class="app-sidebar-section">Management</div>
+        <div class="app-sidebar-section">Administration</div>
         <ul class="app-sidebar-nav">
             <li class="app-sidebar-nav-item">
                 <a href="{{ route('admin.users.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                     <i class="bi bi-person-gear"></i> Users
-                </a>
-            </li>
-            <li class="app-sidebar-nav-item">
-                <a href="{{ route('admin.complaints.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('admin.complaints.*') ? 'active' : '' }}">
-                    <i class="bi bi-chat-square-text"></i> Complaints
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
@@ -58,22 +91,8 @@
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
-                <a href="{{ route('payments.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('payments.*') || request()->routeIs('refunds.*') ? 'active' : '' }}">
-                    <i class="bi bi-cash-coin"></i> Payments
-                </a>
-            </li>
-            <li class="app-sidebar-nav-item">
                 <a href="{{ route('admin.settings.edit') }}" class="app-sidebar-nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
                     <i class="bi bi-gear"></i> Settings
-                </a>
-            </li>
-        </ul>
-
-        <div class="app-sidebar-section">Special</div>
-        <ul class="app-sidebar-nav">
-            <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link">
-                    <i class="bi bi-grid-3x3"></i> Floor Plan <small class="text-secondary-custom">(soon)</small>
                 </a>
             </li>
         </ul>
@@ -83,6 +102,11 @@
             <li class="app-sidebar-nav-item">
                 <a href="{{ route('dashboard') }}" class="app-sidebar-nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+            </li>
+            <li class="app-sidebar-nav-item">
+                <a href="{{ route('floor-plan.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('floor-plan.*') ? 'active' : '' }}">
+                    <i class="bi bi-grid-3x3"></i> Floor Plan
                 </a>
             </li>
             <li class="app-sidebar-nav-item">

@@ -40,6 +40,24 @@
         </div>
 
         <div class="guest-content">
+            <nav class="guest-portal-nav mb-4">
+                <a href="{{ route('guest.dashboard') }}" class="guest-portal-nav-link {{ request()->routeIs('guest.dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-house"></i> Home
+                </a>
+                <a href="{{ route('guest.bookings.index') }}" class="guest-portal-nav-link {{ request()->routeIs('guest.bookings.*') ? 'active' : '' }}">
+                    <i class="bi bi-calendar-check"></i> Bookings
+                </a>
+                <a href="{{ route('guest.bills.index') }}" class="guest-portal-nav-link {{ request()->routeIs('guest.bills.*') ? 'active' : '' }}">
+                    <i class="bi bi-receipt"></i> Bills
+                </a>
+                <a href="{{ route('guest.complaints.index') }}" class="guest-portal-nav-link {{ request()->routeIs('guest.complaints.*') ? 'active' : '' }}">
+                    <i class="bi bi-chat-square-text"></i> Complaints
+                </a>
+                <a href="{{ route('guest.profile.edit') }}" class="guest-portal-nav-link {{ request()->routeIs('guest.profile.*') ? 'active' : '' }}">
+                    <i class="bi bi-person"></i> Profile
+                </a>
+            </nav>
+
             @if (session('success'))
                 <div class="d-none" data-toast data-type="success">{{ session('success') }}</div>
             @endif

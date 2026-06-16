@@ -60,10 +60,13 @@ class DashboardController extends Controller
                 ->where('resolved_at', '>=', now()->subDays(7))->count(),
         ];
 
+        $pendingBookings = Booking::where('status', 'confirmed')->count();
+
         return view('dashboard.admin', compact(
             'totalRooms', 'availableRooms', 'occupiedRooms', 'maintenanceRooms',
             'reservedRooms', 'occupancyRate', 'totalStaff', 'totalGuests',
-            'roomsByStatus', 'roomsByFloor', 'recentActivity', 'complaintStats'
+            'roomsByStatus', 'roomsByFloor', 'recentActivity', 'complaintStats',
+            'pendingBookings'
         ));
     }
 
