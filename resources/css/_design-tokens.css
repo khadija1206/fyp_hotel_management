@@ -1,0 +1,265 @@
+/* ============================================================
+   DESIGN TOKENS — Hotel Management System
+   Single source of truth for all colors and visual constants.
+   Future theme manager: override these :root variables at runtime
+   (inline <style> or injected stylesheet from admin settings).
+   Reference: 01_DESIGN_SYSTEM.md
+   ============================================================ */
+
+:root {
+    /* === PRIMARY BRAND === */
+    --color-primary: #1A4D5C;
+    --color-primary-dark: #123842;
+    --color-primary-light: #2A6B7C;
+    --color-primary-rgb: 26, 77, 92;
+
+    /* === ACCENT === */
+    --color-accent: #C28840;
+    --color-accent-dark: #9E6E33;
+    --color-accent-rgb: 194, 136, 64;
+
+    /* === BACKGROUNDS === */
+    --color-bg-page: #FAF8F3;
+    --color-bg-card: #FFFFFF;
+    --color-bg-subtle: #F2EFE7;
+    --color-bg-sidebar: #1A4D5C;
+    --color-bg-topbar: #FFFFFF;
+    --color-bg-auth-card: #FFFFFF;
+    --color-bg-auth-gradient-start: #FAF8F3;
+    --color-bg-auth-gradient-end: #F2EFE7;
+    --color-bg-guest-topbar: #1A4D5C;
+    --color-bg-table-head: #F2EFE7;
+    --color-bg-table-row-hover: #F2EFE7;
+    --color-bg-dropdown-hover: #F2EFE7;
+    --color-bg-code: #F2EFE7;
+    --color-bg-stat-icon: #F2EFE7;
+    --color-bg-stat-icon-accent: #E7F3EC;
+    --color-bg-transparent: transparent;
+
+    /* === TEXT === */
+    --color-text-primary: #1F2937;
+    --color-text-secondary: #6B7280;
+    --color-text-muted: #9CA3AF;
+    --color-text-inverse: #FFFFFF;
+    --color-text-on-primary: #E8F1F4;
+    --color-text-on-sidebar: #E8F1F4;
+    --color-text-link: #1A4D5C;
+    --color-text-link-hover: #123842;
+    --color-text-required: #C44545;
+    --color-text-code: #123842;
+    --color-text-stat-icon: #1A4D5C;
+    --color-text-stat-icon-accent: #2D7A4F;
+    --color-text-guest-topbar: #FFFFFF;
+    --color-text-pagination: #1F2937;
+    --color-text-pagination-active: #FFFFFF;
+    --color-text-toast: #1F2937;
+    --color-text-toast-close: #9CA3AF;
+
+    /* === BORDERS === */
+    --color-border: #E5E7EB;
+    --color-border-light: #F3F4F6;
+    --color-border-strong: #D1D5DB;
+    --color-border-focus: #1A4D5C;
+    --color-border-toast: #E5E7EB;
+    --color-border-sidebar: rgba(255, 255, 255, 0.1);
+    --color-border-info-row: #F3F4F6;
+
+    /* === STATUS — SOLID === */
+    --color-success: #2D7A4F;
+    --color-success-dark: #1E5236;
+    --color-danger: #C44545;
+    --color-danger-dark: #8B2E2E;
+    --color-warning: #D4904A;
+    --color-warning-dark: #8B5A24;
+    --color-info: #4A7CC4;
+    --color-info-dark: #2D5288;
+    --color-neutral: #6B7280;
+    --color-neutral-dark: #374151;
+
+    /* === STATUS — BACKGROUNDS === */
+    --color-success-bg: #E7F3EC;
+    --color-danger-bg: #FBEAEA;
+    --color-warning-bg: #FBF1E5;
+    --color-info-bg: #EAF1F9;
+    --color-neutral-bg: #F3F4F6;
+
+    /* === STATUS — TEXT ON BACKGROUNDS === */
+    --color-success-text: #1E5236;
+    --color-danger-text: #8B2E2E;
+    --color-warning-text: #8B5A24;
+    --color-info-text: #2D5288;
+    --color-neutral-text: #374151;
+
+    /* === STATUS — TOAST ACCENTS === */
+    --color-toast-success-border: #2D7A4F;
+    --color-toast-danger-border: #C44545;
+    --color-toast-warning-border: #D4904A;
+    --color-toast-info-border: #4A7CC4;
+    --color-toast-success-icon: #2D7A4F;
+    --color-toast-danger-icon: #C44545;
+    --color-toast-warning-icon: #D4904A;
+    --color-toast-info-icon: #4A7CC4;
+
+    /* === SIDEBAR INTERACTIVE === */
+    --color-sidebar-link-hover-bg: rgba(255, 255, 255, 0.08);
+    --color-sidebar-link-active-bg: rgba(255, 255, 255, 0.15);
+    --color-sidebar-link-hover-text: #FFFFFF;
+    --color-sidebar-link-active-text: #FFFFFF;
+    --color-sidebar-brand-text: #FFFFFF;
+    --color-sidebar-avatar-bg: #C28840;
+    --color-sidebar-avatar-text: #FFFFFF;
+    --color-sidebar-user-name: #FFFFFF;
+    --color-sidebar-logout-text: #FFFFFF;
+
+    /* === FOCUS & INTERACTION === */
+    --color-focus-ring: rgba(var(--color-primary-rgb), 0.15);
+    --color-focus-ring-subtle: rgba(var(--color-primary-rgb), 0.1);
+    --color-shadow-base: 0, 0, 0;
+
+    /* === BUTTONS === */
+    --color-btn-primary-bg: var(--color-primary);
+    --color-btn-primary-border: var(--color-primary);
+    --color-btn-primary-text: var(--color-text-inverse);
+    --color-btn-primary-hover-bg: var(--color-primary-dark);
+    --color-btn-primary-hover-border: var(--color-primary-dark);
+    --color-btn-primary-hover-text: var(--color-text-inverse);
+    --color-btn-primary-disabled-bg: var(--color-primary-light);
+    --color-btn-primary-disabled-border: var(--color-primary-light);
+
+    --color-btn-secondary-bg: var(--color-bg-card);
+    --color-btn-secondary-border: var(--color-border-strong);
+    --color-btn-secondary-text: var(--color-text-primary);
+    --color-btn-secondary-hover-bg: var(--color-bg-subtle);
+    --color-btn-secondary-hover-border: var(--color-border-strong);
+    --color-btn-secondary-hover-text: var(--color-text-primary);
+
+    --color-btn-outline-primary-border: var(--color-primary);
+    --color-btn-outline-primary-text: var(--color-primary);
+    --color-btn-outline-primary-hover-bg: var(--color-primary);
+    --color-btn-outline-primary-hover-text: var(--color-text-inverse);
+
+    --color-btn-danger-bg: var(--color-danger);
+    --color-btn-danger-border: var(--color-danger);
+    --color-btn-danger-hover-bg: var(--color-danger-dark);
+    --color-btn-danger-hover-border: var(--color-danger-dark);
+
+    --color-btn-success-bg: var(--color-success);
+    --color-btn-success-border: var(--color-success);
+    --color-btn-success-hover-bg: var(--color-success-dark);
+    --color-btn-success-hover-border: var(--color-success-dark);
+
+    --color-btn-link-text: var(--color-primary);
+    --color-btn-link-hover-text: var(--color-primary-dark);
+
+    /* === FORM === */
+    --color-input-bg: var(--color-bg-card);
+    --color-input-border: var(--color-border);
+    --color-input-text: var(--color-text-primary);
+    --color-input-placeholder: var(--color-text-muted);
+    --color-input-focus-border: var(--color-border-focus);
+    --color-input-label: var(--color-text-primary);
+    --color-input-invalid-border: var(--color-danger);
+    --color-input-invalid-text: var(--color-danger-text);
+
+    /* === PAGINATION === */
+    --color-pagination-link-text: var(--color-text-pagination);
+    --color-pagination-link-border: var(--color-border);
+    --color-pagination-active-bg: var(--color-primary);
+    --color-pagination-active-border: var(--color-primary);
+    --color-pagination-active-text: var(--color-text-pagination-active);
+
+    /* === AUTH === */
+    --color-auth-brand-icon-bg: var(--color-primary);
+    --color-auth-brand-icon-text: var(--color-text-inverse);
+    --color-auth-title: var(--color-text-primary);
+    --color-auth-subtitle: var(--color-text-secondary);
+
+    /* === OPACITY === */
+    --opacity-disabled: 0.6;
+    --opacity-sidebar-section: 0.6;
+    --opacity-sidebar-role: 0.7;
+
+    /* === TYPOGRAPHY === */
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+    --text-xs: 12px;
+    --text-sm: 13px;
+    --text-base: 14px;
+    --text-md: 16px;
+    --text-lg: 18px;
+    --text-xl: 22px;
+    --text-2xl: 28px;
+    --text-3xl: 36px;
+
+    /* === SPACING === */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+
+    /* === RADIUS === */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --radius-full: 9999px;
+
+    /* === SHADOWS === */
+    --shadow-sm: 0 1px 2px rgba(var(--color-shadow-base), 0.04);
+    --shadow-md: 0 2px 8px rgba(var(--color-shadow-base), 0.06);
+    --shadow-lg: 0 4px 16px rgba(var(--color-shadow-base), 0.08);
+    --shadow-xl: 0 8px 32px rgba(var(--color-shadow-base), 0.12);
+
+    /* === LAYOUT === */
+    --sidebar-width: 260px;
+    --sidebar-width-collapsed: 70px;
+    --topbar-height: 64px;
+    --content-max-width: 1400px;
+    --guest-content-max-width: 1100px;
+    --auth-card-max-width: 440px;
+    --toast-max-width: 380px;
+
+    /* ============================================================
+       BOOTSTRAP BRIDGE — maps Bootstrap vars to HMS tokens
+       so Bootstrap components follow theme when tokens change
+       ============================================================ */
+    --bs-primary: var(--color-primary);
+    --bs-primary-rgb: var(--color-primary-rgb);
+    --bs-secondary: var(--color-neutral);
+    --bs-secondary-rgb: 107, 114, 128;
+    --bs-success: var(--color-success);
+    --bs-success-rgb: 45, 122, 79;
+    --bs-danger: var(--color-danger);
+    --bs-danger-rgb: 196, 69, 69;
+    --bs-warning: var(--color-warning);
+    --bs-warning-rgb: 212, 144, 74;
+    --bs-info: var(--color-info);
+    --bs-info-rgb: 74, 124, 196;
+    --bs-light: var(--color-bg-subtle);
+    --bs-light-rgb: 242, 239, 231;
+    --bs-dark: var(--color-text-primary);
+    --bs-dark-rgb: 31, 41, 55;
+    --bs-body-color: var(--color-text-primary);
+    --bs-body-color-rgb: 31, 41, 55;
+    --bs-body-bg: var(--color-bg-page);
+    --bs-body-bg-rgb: 250, 248, 243;
+    --bs-emphasis-color: var(--color-text-primary);
+    --bs-secondary-color: var(--color-text-secondary);
+    --bs-secondary-bg: var(--color-bg-subtle);
+    --bs-tertiary-color: var(--color-text-muted);
+    --bs-tertiary-bg: var(--color-bg-subtle);
+    --bs-border-color: var(--color-border);
+    --bs-border-color-translucent: var(--color-border-light);
+    --bs-link-color: var(--color-text-link);
+    --bs-link-color-rgb: var(--color-primary-rgb);
+    --bs-link-hover-color: var(--color-text-link-hover);
+    --bs-link-hover-color-rgb: 18, 56, 66;
+    --bs-heading-color: var(--color-text-primary);
+    --bs-focus-ring-color: var(--color-focus-ring-subtle);
+}
