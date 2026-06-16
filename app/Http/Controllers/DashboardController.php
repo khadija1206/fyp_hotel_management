@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AuditLog;
+use App\Models\Room;
+use App\Models\User;
+
 class DashboardController extends Controller
 {
     public function index()
@@ -9,13 +13,56 @@ class DashboardController extends Controller
         $user = auth()->user();
 
         if ($user->isAdmin()) {
-            return view('dashboard.admin');
+            return $this->adminDashboard();
         }
 
         if ($user->isReceptionist()) {
-            return view('dashboard.receptionist');
+            return $this->receptionistDashboard();
         }
 
         return view('dashboard.guest');
+    }
+
+    private function adminDashboard()
+    {
+        $totalRooms = Room::active()->count();
+        $availableRooms = Room::active()->where('status', 'available')->count();
+        $occupiedRooms = Room::active()->where('status', 'occupied')->count();
+        $maintenanceRooms = Room::active()->where('status', 'maintenance')->count();
+        $reservedRooms = Room::active()->where('status', 'reserved')->count();
+
+        $occupancyRate = $totalRooms > 0 ? round(($occupiedRooms / $totalRooms) * 100) : 0;
+
+        $totalStaff = User::whereIn('role', ['admin', 'receptionist'])->where('is_active', true)->count();
+        $totalGuests = User::where('role', 'guest')->count();
+
+        $roomsByStatus = [
+            'available' => $availableRooms,
+            'occupied' => $occupiedRooms,
+            'reserved' => $reservedRooms,
+            'maintenance' => $maintenanceRooms,
+        ];
+
+        $roomsByFloor = Room::active()
+            ->selectRaw("floor, COUNT(*) as total, SUM(CASE WHEN status = 'occupied' THEN 1 ELSE 0 END) as occupied")
+            ->groupBy('floor')
+            ->orderBy('floor')
+            ->get();
+
+        $recentActivity = AuditLog::with('user')->latest()->take(8)->get();
+
+        return view('dashboard.admin', compact(
+            'totalRooms', 'availableRooms', 'occupiedRooms', 'maintenanceRooms',
+            'reservedRooms', 'occupancyRate', 'totalStaff', 'totalGuests',
+            'roomsByStatus', 'roomsByFloor', 'recentActivity'
+        ));
+    }
+
+    private function receptionistDashboard()
+    {
+        $availableRooms = Room::active()->where('status', 'available')->count();
+        $occupiedRooms = Room::active()->where('status', 'occupied')->count();
+
+        return view('dashboard.receptionist', compact('availableRooms', 'occupiedRooms'));
     }
 }

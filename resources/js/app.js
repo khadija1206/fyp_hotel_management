@@ -1,7 +1,10 @@
 import './bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import Chart from 'chart.js/auto';
 import $ from 'jquery';
+
 window.$ = window.jQuery = $;
+window.Chart = Chart;
 
 // ============================================================
 // TOAST NOTIFICATION SYSTEM

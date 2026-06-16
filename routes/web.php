@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\ReportsController;
+use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\RoomTypeController;
+use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +27,23 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+Route::middleware(['auth', 'verified', 'role:admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::resource('users', UserController::class)->except(['show']);
+        Route::post('users/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('users.toggle-status');
+
+        Route::resource('room-types', RoomTypeController::class)->except(['show']);
+
+        Route::resource('rooms', RoomController::class)->except(['show']);
+
+        Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
+        Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
+
+        Route::get('reports', [ReportsController::class, 'index'])->name('reports.index');
+    });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/my-portal', [DashboardController::class, 'index'])->name('guest.dashboard');

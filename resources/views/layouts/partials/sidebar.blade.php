@@ -14,18 +14,23 @@
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link {{ request()->routeIs('admin.rooms.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.rooms.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('admin.rooms.*') ? 'active' : '' }}">
                     <i class="bi bi-door-closed"></i> Rooms
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link {{ request()->routeIs('admin.bookings.*') ? 'active' : '' }}">
-                    <i class="bi bi-calendar-check"></i> Bookings
+                <a href="{{ route('admin.room-types.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('admin.room-types.*') ? 'active' : '' }}">
+                    <i class="bi bi-grid"></i> Room Types
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link {{ request()->routeIs('admin.guests.*') ? 'active' : '' }}">
-                    <i class="bi bi-people"></i> Guests
+                <a href="#" class="app-sidebar-nav-link">
+                    <i class="bi bi-calendar-check"></i> Bookings <small class="text-secondary-custom">(soon)</small>
+                </a>
+            </li>
+            <li class="app-sidebar-nav-item">
+                <a href="#" class="app-sidebar-nav-link">
+                    <i class="bi bi-people"></i> Guests <small class="text-secondary-custom">(soon)</small>
                 </a>
             </li>
         </ul>
@@ -33,22 +38,22 @@
         <div class="app-sidebar-section">Management</div>
         <ul class="app-sidebar-nav">
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.users.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                     <i class="bi bi-person-gear"></i> Users
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link {{ request()->routeIs('admin.complaints.*') ? 'active' : '' }}">
-                    <i class="bi bi-chat-square-text"></i> Complaints
+                <a href="#" class="app-sidebar-nav-link">
+                    <i class="bi bi-chat-square-text"></i> Complaints <small class="text-secondary-custom">(soon)</small>
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link {{ request()->routeIs('admin.reports.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.reports.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('admin.reports.*') ? 'active' : '' }}">
                     <i class="bi bi-graph-up"></i> Reports
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.settings.edit') }}" class="app-sidebar-nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
                     <i class="bi bi-gear"></i> Settings
                 </a>
             </li>
@@ -57,13 +62,8 @@
         <div class="app-sidebar-section">Special</div>
         <ul class="app-sidebar-nav">
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link {{ request()->routeIs('floorplan.*') ? 'active' : '' }}">
-                    <i class="bi bi-grid-3x3"></i> Floor Plan
-                </a>
-            </li>
-            <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link {{ request()->routeIs('admin.layout-editor') ? 'active' : '' }}">
-                    <i class="bi bi-arrows-move"></i> Layout Editor
+                <a href="#" class="app-sidebar-nav-link">
+                    <i class="bi bi-grid-3x3"></i> Floor Plan <small class="text-secondary-custom">(soon)</small>
                 </a>
             </li>
         </ul>

@@ -7,16 +7,10 @@
 
     <div class="row g-3 mb-4">
         <div class="col-md-3 col-sm-6">
-            <x-stat-card label="Available Rooms" value="0" icon="door-open" />
+            <x-stat-card label="Available Rooms" :value="$availableRooms" icon="door-open" />
         </div>
         <div class="col-md-3 col-sm-6">
-            <x-stat-card label="Today's Check-ins" value="0" icon="box-arrow-in-right" />
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <x-stat-card label="Today's Check-outs" value="0" icon="box-arrow-right" />
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <x-stat-card label="Walk-ins Today" value="0" icon="person-walking" />
+            <x-stat-card label="Occupied Rooms" :value="$occupiedRooms" icon="door-closed" />
         </div>
     </div>
 

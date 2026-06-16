@@ -13,7 +13,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AdminUserSeeder::class,
-            // More seeders will be added in later MD files
+            StaffUserSeeder::class,
+            SettingSeeder::class,
+            RoomTypeSeeder::class,
+            RoomSeeder::class,
         ]);
     }
 }
