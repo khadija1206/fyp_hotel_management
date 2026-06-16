@@ -24,13 +24,18 @@
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link">
-                    <i class="bi bi-calendar-check"></i> Bookings <small class="text-secondary-custom">(soon)</small>
+                <a href="{{ route('bookings.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('bookings.*') ? 'active' : '' }}">
+                    <i class="bi bi-calendar-check"></i> Bookings
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link">
-                    <i class="bi bi-people"></i> Guests <small class="text-secondary-custom">(soon)</small>
+                <a href="{{ route('guests.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('guests.*') ? 'active' : '' }}">
+                    <i class="bi bi-people"></i> Guests
+                </a>
+            </li>
+            <li class="app-sidebar-nav-item">
+                <a href="{{ route('walk-in.create') }}" class="app-sidebar-nav-link {{ request()->routeIs('walk-in.*') ? 'active' : '' }}">
+                    <i class="bi bi-person-walking"></i> Walk-In
                 </a>
             </li>
         </ul>
@@ -76,18 +81,23 @@
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link">
-                    <i class="bi bi-grid-3x3"></i> Floor Plan
-                </a>
-            </li>
-            <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link">
+                <a href="{{ route('bookings.create') }}" class="app-sidebar-nav-link {{ request()->routeIs('bookings.create') ? 'active' : '' }}">
                     <i class="bi bi-calendar-plus"></i> New Booking
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link">
-                    <i class="bi bi-person-plus"></i> Register Guest
+                <a href="{{ route('walk-in.create') }}" class="app-sidebar-nav-link {{ request()->routeIs('walk-in.*') ? 'active' : '' }}">
+                    <i class="bi bi-person-walking"></i> Walk-In
+                </a>
+            </li>
+            <li class="app-sidebar-nav-item">
+                <a href="{{ route('check-in.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('check-in.*') ? 'active' : '' }}">
+                    <i class="bi bi-box-arrow-in-right"></i> Check-Ins
+                </a>
+            </li>
+            <li class="app-sidebar-nav-item">
+                <a href="{{ route('check-out.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('check-out.*') ? 'active' : '' }}">
+                    <i class="bi bi-box-arrow-right"></i> Check-Outs
                 </a>
             </li>
         </ul>
@@ -95,18 +105,13 @@
         <div class="app-sidebar-section">Records</div>
         <ul class="app-sidebar-nav">
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link">
+                <a href="{{ route('bookings.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('bookings.index') || request()->routeIs('bookings.show') ? 'active' : '' }}">
                     <i class="bi bi-calendar-check"></i> All Bookings
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link">
+                <a href="{{ route('guests.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('guests.*') ? 'active' : '' }}">
                     <i class="bi bi-people"></i> Guests
-                </a>
-            </li>
-            <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link">
-                    <i class="bi bi-cash-stack"></i> Payments
                 </a>
             </li>
         </ul>

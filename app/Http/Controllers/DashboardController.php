@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AuditLog;
+use App\Models\Booking;
 use App\Models\Room;
 use App\Models\User;
 
@@ -60,9 +61,33 @@ class DashboardController extends Controller
 
     private function receptionistDashboard()
     {
-        $availableRooms = Room::active()->where('status', 'available')->count();
-        $occupiedRooms = Room::active()->where('status', 'occupied')->count();
+        $today = today();
 
-        return view('dashboard.receptionist', compact('availableRooms', 'occupiedRooms'));
+        $stats = [
+            'available_rooms' => Room::active()->where('status', 'available')->count(),
+            'occupied_rooms' => Room::active()->where('status', 'occupied')->count(),
+            'todays_check_ins' => Booking::where('status', 'confirmed')
+                ->whereDate('check_in_date', '<=', $today)
+                ->count(),
+            'todays_check_outs' => Booking::where('status', 'checked_in')
+                ->whereDate('check_out_date', $today)
+                ->count(),
+            'walk_ins_today' => Booking::where('is_walk_in', true)
+                ->whereDate('created_at', $today)
+                ->count(),
+        ];
+
+        $pendingCheckIns = Booking::with(['guest', 'room'])
+            ->where('status', 'confirmed')
+            ->whereDate('check_in_date', '<=', $today)
+            ->orderBy('check_in_date')
+            ->take(5)->get();
+
+        $pendingCheckOuts = Booking::with(['guest', 'room'])
+            ->where('status', 'checked_in')
+            ->whereDate('check_out_date', $today)
+            ->take(5)->get();
+
+        return view('dashboard.receptionist', compact('stats', 'pendingCheckIns', 'pendingCheckOuts'));
     }
 }

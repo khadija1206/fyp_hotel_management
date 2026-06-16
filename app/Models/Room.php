@@ -30,6 +30,42 @@ class Room extends Model
         return $this->belongsTo(RoomType::class);
     }
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function currentBooking()
+    {
+        return $this->hasOne(Booking::class)->where('status', 'checked_in')->latest();
+    }
+
+    public function activeBooking()
+    {
+        return $this->hasOne(Booking::class)->whereIn('status', ['confirmed', 'checked_in'])->latest();
+    }
+
+    public function isAvailableForDates($checkIn, $checkOut, ?int $excludeBookingId = null): bool
+    {
+        if ($this->status === 'maintenance' || ! $this->is_active) {
+            return false;
+        }
+
+        $checkIn = \Carbon\Carbon::parse($checkIn);
+        $checkOut = \Carbon\Carbon::parse($checkOut);
+
+        $conflict = $this->bookings()
+            ->whereIn('status', ['confirmed', 'checked_in'])
+            ->when($excludeBookingId, fn ($q) => $q->where('id', '!=', $excludeBookingId))
+            ->where(function ($q) use ($checkIn, $checkOut) {
+                $q->where('check_in_date', '<', $checkOut)
+                    ->where('check_out_date', '>', $checkIn);
+            })
+            ->exists();
+
+        return ! $conflict;
+    }
+
     public function isAvailable(): bool
     {
         return $this->status === 'available';

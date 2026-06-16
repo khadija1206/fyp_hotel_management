@@ -59,4 +59,19 @@ class User extends Authenticatable
     {
         return $this->role === 'guest';
     }
+
+    public function guest()
+    {
+        return $this->hasOne(Guest::class);
+    }
+
+    public function createdBookings()
+    {
+        return $this->hasMany(Booking::class, 'created_by');
+    }
+
+    public function createdGuests()
+    {
+        return $this->hasMany(Guest::class, 'created_by');
+    }
 }
