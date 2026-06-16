@@ -58,6 +58,11 @@
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
+                <a href="{{ route('payments.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('payments.*') || request()->routeIs('refunds.*') ? 'active' : '' }}">
+                    <i class="bi bi-cash-coin"></i> Payments
+                </a>
+            </li>
+            <li class="app-sidebar-nav-item">
                 <a href="{{ route('admin.settings.edit') }}" class="app-sidebar-nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
                     <i class="bi bi-gear"></i> Settings
                 </a>
@@ -112,6 +117,11 @@
             <li class="app-sidebar-nav-item">
                 <a href="{{ route('guests.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('guests.*') ? 'active' : '' }}">
                     <i class="bi bi-people"></i> Guests
+                </a>
+            </li>
+            <li class="app-sidebar-nav-item">
+                <a href="{{ route('payments.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('payments.*') || request()->routeIs('refunds.*') ? 'active' : '' }}">
+                    <i class="bi bi-cash-coin"></i> Payments
                 </a>
             </li>
         </ul>

@@ -64,25 +64,63 @@
                 @endif
             </x-card>
 
-            <x-card title="Bill Summary">
+            <x-card title="Bill & Payments">
                 <x-info-row label="Rate per Night">{{ formatPKR($booking->rate_per_night) }}</x-info-row>
                 <x-info-row label="Subtotal ({{ $booking->num_nights }} nights)">{{ formatPKR($booking->subtotal) }}</x-info-row>
                 <x-info-row label="Tax ({{ $booking->tax_rate }}%)">{{ formatPKR($booking->tax_amount) }}</x-info-row>
-                <div class="d-flex justify-content-between pt-3" style="border-top: 2px solid var(--color-primary);">
+
+                <div class="d-flex justify-content-between pt-3 mt-3" style="border-top: 2px solid var(--color-primary);">
                     <strong style="font-size: var(--text-lg);">Total Amount</strong>
                     <strong style="font-size: var(--text-lg); color: var(--color-primary);">{{ formatPKR($booking->total_amount) }}</strong>
                 </div>
+
+                @if($booking->allPayments->isNotEmpty())
+                    <h5 class="mt-4">Payment History</h5>
+                    @foreach($booking->allPayments as $p)
+                        <div class="d-flex justify-content-between py-2" style="border-bottom: 1px solid var(--color-border-light);">
+                            <div>
+                                <a href="{{ route('payments.show', $p) }}"><strong>{{ $p->payment_reference }}</strong></a>
+                                <div><small class="text-secondary-custom">{{ formatDate($p->payment_date) }} — {{ $p->method_label }}@if($p->isVoided()) — <span class="text-danger">VOIDED</span>@endif</small></div>
+                            </div>
+                            <strong class="{{ $p->isVoided() ? 'text-decoration-line-through text-secondary-custom' : '' }}">
+                                {{ $p->type === 'refund' ? '-' : '' }}{{ formatPKR($p->amount) }}
+                            </strong>
+                        </div>
+                    @endforeach
+                @endif
+
+                <div class="row mt-3 pt-3" style="border-top: 1px solid var(--color-border-light);">
+                    <div class="col-6 text-secondary-custom">Paid</div>
+                    <div class="col-6 text-end">{{ formatPKR($booking->amount_paid) }}</div>
+                    <div class="col-6"><strong>Balance Due</strong></div>
+                    <div class="col-6 text-end"><strong style="color: var(--color-danger);">{{ formatPKR($booking->amount_due) }}</strong></div>
+                </div>
+
                 <div class="mt-3">
                     Payment Status:
                     @if($booking->payment_status === 'paid')
-                        <x-status-badge status="Paid" type="success" />
+                        <x-status-badge status="Paid in Full" type="success" />
                     @elseif($booking->payment_status === 'partial')
-                        <x-status-badge status="Partial" type="warning" />
+                        <x-status-badge status="Partial Payment" type="warning" />
                     @else
                         <x-status-badge status="Unpaid" type="danger" />
                     @endif
-                    <small class="text-secondary-custom ms-2">(Payment recording comes in billing module)</small>
                 </div>
+
+                @if($booking->status !== 'cancelled')
+                    <div class="d-flex gap-2 mt-3">
+                        @if($booking->amount_due > 0)
+                            <a href="{{ route('payments.create', $booking) }}" class="btn btn-primary">
+                                <i class="bi bi-cash-coin"></i> Record Payment
+                            </a>
+                        @endif
+                        @if($booking->amount_paid > 0)
+                            <a href="{{ route('refunds.create', $booking) }}" class="btn btn-secondary">
+                                <i class="bi bi-arrow-return-left"></i> Issue Refund
+                            </a>
+                        @endif
+                    </div>
+                @endif
             </x-card>
         </div>
 

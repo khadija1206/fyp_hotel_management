@@ -37,6 +37,11 @@ class Guest extends Model
         return $this->hasMany(Booking::class);
     }
 
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
     public function currentBooking()
     {
         return $this->hasOne(Booking::class)->where('status', 'checked_in')->latest();

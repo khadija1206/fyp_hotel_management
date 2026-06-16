@@ -48,6 +48,28 @@ class Booking extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    public function payments()
+    {
+        return $this->hasMany(Payment::class)->whereNull('voided_at');
+    }
+
+    public function allPayments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function getAmountPaidAttribute(): float
+    {
+        return (float) $this->payments()
+            ->where('type', 'payment')
+            ->sum('amount') - $this->payments()->where('type', 'refund')->sum('amount');
+    }
+
+    public function getAmountDueAttribute(): float
+    {
+        return max(0, (float) $this->total_amount - $this->amount_paid);
+    }
+
     public function isConfirmed(): bool
     {
         return $this->status === 'confirmed';

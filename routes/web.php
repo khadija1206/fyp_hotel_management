@@ -16,6 +16,7 @@ use App\Http\Controllers\Receptionist\BookingController;
 use App\Http\Controllers\Receptionist\CheckInController;
 use App\Http\Controllers\Receptionist\CheckOutController;
 use App\Http\Controllers\Receptionist\GuestController;
+use App\Http\Controllers\Receptionist\PaymentController;
 use App\Http\Controllers\Receptionist\WalkInController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +61,17 @@ Route::middleware(['auth', 'verified', 'role:admin,receptionist'])->group(functi
 
     Route::get('bookings/available-rooms', [BookingController::class, 'availableRooms'])->name('bookings.available-rooms');
     Route::post('bookings/{booking}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
+
+    Route::get('payments', [PaymentController::class, 'index'])->name('payments.index');
+    Route::get('payments/{payment}', [PaymentController::class, 'show'])->name('payments.show');
+    Route::put('payments/{payment}/void', [PaymentController::class, 'void'])->name('payments.void');
+
+    Route::get('bookings/{booking}/payment', [PaymentController::class, 'create'])->name('payments.create');
+    Route::post('bookings/{booking}/payment', [PaymentController::class, 'store'])->name('payments.store');
+
+    Route::get('bookings/{booking}/refund', [PaymentController::class, 'refundForm'])->name('refunds.create');
+    Route::post('bookings/{booking}/refund', [PaymentController::class, 'refund'])->name('refunds.store');
+
     Route::resource('bookings', BookingController::class);
 
     Route::get('check-in', [CheckInController::class, 'index'])->name('check-in.index');

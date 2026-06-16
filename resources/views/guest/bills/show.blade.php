@@ -88,14 +88,45 @@
             </tfoot>
         </table>
 
-        <div class="d-flex justify-content-between align-items-center p-3 rounded" style="background-color: var(--color-bg-subtle);">
-            <strong>Payment Status:</strong>
-            @if($booking->payment_status === 'paid')
-                <span style="color: var(--color-success); font-weight: 700;">✓ PAID</span>
-            @elseif($booking->payment_status === 'partial')
-                <span style="color: var(--color-warning-text); font-weight: 700;">⚠ PARTIALLY PAID</span>
-            @else
-                <span style="color: var(--color-danger); font-weight: 700;">✗ UNPAID</span>
+        <div class="mt-4">
+            <div class="d-flex justify-content-between align-items-center p-3 rounded mb-3" style="background-color: var(--color-bg-subtle);">
+                <strong>Payment Status:</strong>
+                @if($booking->payment_status === 'paid')
+                    <span style="color: var(--color-success); font-weight: 700;">✓ PAID IN FULL</span>
+                @elseif($booking->payment_status === 'partial')
+                    <span style="color: var(--color-warning-text); font-weight: 700;">⚠ PARTIALLY PAID</span>
+                @else
+                    <span style="color: var(--color-danger); font-weight: 700;">✗ UNPAID</span>
+                @endif
+            </div>
+
+            @if($booking->payments->isNotEmpty())
+                <h5>Payment Records</h5>
+                <table class="table table-sm">
+                    <thead>
+                        <tr><th>Date</th><th>Reference</th><th>Method</th><th class="text-end">Amount</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach($booking->payments as $p)
+                            <tr>
+                                <td>{{ formatDate($p->payment_date) }}</td>
+                                <td><small>{{ $p->payment_reference }}</small></td>
+                                <td>{{ $p->method_label }}</td>
+                                <td class="text-end">{{ $p->type === 'refund' ? '-' : '' }}{{ formatPKR($p->amount) }}</td>
+                            </tr>
+                        @endforeach
+                        <tr style="border-top: 2px solid var(--color-primary);">
+                            <td colspan="3" class="text-end"><strong>Paid:</strong></td>
+                            <td class="text-end"><strong>{{ formatPKR($booking->amount_paid) }}</strong></td>
+                        </tr>
+                        @if($booking->amount_due > 0)
+                            <tr>
+                                <td colspan="3" class="text-end"><strong>Due:</strong></td>
+                                <td class="text-end" style="color: var(--color-danger);"><strong>{{ formatPKR($booking->amount_due) }}</strong></td>
+                            </tr>
+                        @endif
+                    </tbody>
+                </table>
             @endif
         </div>
 

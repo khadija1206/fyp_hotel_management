@@ -98,7 +98,7 @@ class BookingController extends Controller
 
     public function show(Booking $booking)
     {
-        $booking->load(['guest', 'room.roomType', 'createdBy']);
+        $booking->load(['guest', 'room.roomType', 'createdBy', 'allPayments']);
 
         return view('receptionist.bookings.show', compact('booking'));
     }

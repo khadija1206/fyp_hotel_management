@@ -33,7 +33,7 @@ class BillController extends Controller
             abort(403);
         }
 
-        $booking->load(['room.roomType', 'guest']);
+        $booking->load(['room.roomType', 'guest', 'payments']);
 
         $hotel = [
             'name' => Setting::get('hotel_name'),
