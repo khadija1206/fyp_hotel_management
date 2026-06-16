@@ -48,8 +48,8 @@
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
-                <a href="#" class="app-sidebar-nav-link">
-                    <i class="bi bi-chat-square-text"></i> Complaints <small class="text-secondary-custom">(soon)</small>
+                <a href="{{ route('admin.complaints.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('admin.complaints.*') ? 'active' : '' }}">
+                    <i class="bi bi-chat-square-text"></i> Complaints
                 </a>
             </li>
             <li class="app-sidebar-nav-item">
@@ -122,6 +122,11 @@
             <li class="app-sidebar-nav-item">
                 <a href="{{ route('payments.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('payments.*') || request()->routeIs('refunds.*') ? 'active' : '' }}">
                     <i class="bi bi-cash-coin"></i> Payments
+                </a>
+            </li>
+            <li class="app-sidebar-nav-item">
+                <a href="{{ route('admin.complaints.index') }}" class="app-sidebar-nav-link {{ request()->routeIs('admin.complaints.*') ? 'active' : '' }}">
+                    <i class="bi bi-chat-square-text"></i> Complaints
                 </a>
             </li>
         </ul>

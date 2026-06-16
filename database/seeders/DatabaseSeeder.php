@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             GuestSeeder::class,
             BookingSeeder::class,
             PaymentSeeder::class,
+            ComplaintSeeder::class,
         ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AuditLog;
 use App\Models\Booking;
+use App\Models\Complaint;
 use App\Models\Room;
 use App\Models\User;
 
@@ -52,10 +53,17 @@ class DashboardController extends Controller
 
         $recentActivity = AuditLog::with('user')->latest()->take(8)->get();
 
+        $complaintStats = [
+            'total_open' => Complaint::open()->count(),
+            'high_priority' => Complaint::open()->where('priority', 'high')->count(),
+            'resolved_this_week' => Complaint::where('status', 'resolved')
+                ->where('resolved_at', '>=', now()->subDays(7))->count(),
+        ];
+
         return view('dashboard.admin', compact(
             'totalRooms', 'availableRooms', 'occupiedRooms', 'maintenanceRooms',
             'reservedRooms', 'occupancyRate', 'totalStaff', 'totalGuests',
-            'roomsByStatus', 'roomsByFloor', 'recentActivity'
+            'roomsByStatus', 'roomsByFloor', 'recentActivity', 'complaintStats'
         ));
     }
 

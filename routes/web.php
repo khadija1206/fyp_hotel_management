@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ComplaintController as AdminComplaintController;
 use App\Http\Controllers\Admin\ReportsController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\RoomTypeController;
@@ -83,6 +84,14 @@ Route::middleware(['auth', 'verified', 'role:admin,receptionist'])->group(functi
 
     Route::get('walk-in', [WalkInController::class, 'create'])->name('walk-in.create');
     Route::post('walk-in', [WalkInController::class, 'store'])->name('walk-in.store');
+
+    Route::get('complaints', [AdminComplaintController::class, 'index'])->name('admin.complaints.index');
+    Route::get('complaints/{complaint}', [AdminComplaintController::class, 'show'])->name('admin.complaints.show');
+    Route::put('complaints/{complaint}/start', [AdminComplaintController::class, 'startWork'])->name('admin.complaints.start');
+    Route::put('complaints/{complaint}/resolve', [AdminComplaintController::class, 'resolve'])->name('admin.complaints.resolve');
+    Route::put('complaints/{complaint}/assign', [AdminComplaintController::class, 'assign'])
+        ->name('admin.complaints.assign')
+        ->middleware('role:admin');
 });
 
 Route::middleware(['auth', 'verified', 'role:guest'])->prefix('portal')->name('guest.')->group(function () {
@@ -95,6 +104,10 @@ Route::middleware(['auth', 'verified', 'role:guest'])->prefix('portal')->name('g
     Route::get('bills/{booking}', [GuestBillController::class, 'show'])->name('bills.show');
 
     Route::get('complaints', [GuestComplaintController::class, 'index'])->name('complaints.index');
+    Route::get('complaints/create', [GuestComplaintController::class, 'create'])->name('complaints.create');
+    Route::post('complaints', [GuestComplaintController::class, 'store'])->name('complaints.store');
+    Route::get('complaints/{complaint}', [GuestComplaintController::class, 'show'])->name('complaints.show');
+    Route::put('complaints/{complaint}/reopen', [GuestComplaintController::class, 'reopen'])->name('complaints.reopen');
 
     Route::get('profile', [GuestProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [GuestProfileController::class, 'update'])->name('profile.update');

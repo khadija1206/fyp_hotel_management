@@ -71,7 +71,17 @@
                 <x-info-row label="Active Staff">{{ $totalStaff }}</x-info-row>
                 <x-info-row label="Registered Guests">{{ $totalGuests }}</x-info-row>
                 <x-info-row label="Pending Bookings"><span class="text-secondary-custom">Coming soon</span></x-info-row>
-                <x-info-row label="Open Complaints"><span class="text-secondary-custom">Coming soon</span></x-info-row>
+                <x-info-row label="Open Complaints">
+                    @if($complaintStats['total_open'] > 0)
+                        <span class="text-danger">{{ $complaintStats['total_open'] }}</span>
+                        @if($complaintStats['high_priority'] > 0)
+                            <small class="text-secondary-custom">({{ $complaintStats['high_priority'] }} high priority)</small>
+                        @endif
+                    @else
+                        <span class="text-success">0</span>
+                    @endif
+                </x-info-row>
+                <x-info-row label="Resolved This Week">{{ $complaintStats['resolved_this_week'] }}</x-info-row>
             </x-card>
 
             <x-card title="Recent Activity" subtitle="Last 8 system actions">
